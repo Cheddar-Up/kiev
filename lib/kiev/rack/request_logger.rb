@@ -41,18 +41,21 @@ module Kiev
         exception = rescued_exception || rack_exception || log_exception
 
         if exception || Config.instance.log_request_condition.call(request, response)
-          Kiev.event(
-            :request_finished,
-            form_data(
-              began_at: began_at,
-              env: env,
-              request: request,
-              response: response,
-              status: status,
-              body: body,
-              exception: exception
+          # Do not log hades_reloaded/offers request having record not found error.
+          if not(request.path.include? "api/hades_reloaded/offers/" && body.include? "record_not_found")
+            Kiev.event(
+              :request_finished,
+              form_data(
+                began_at: began_at,
+                env: env,
+                request: request,
+                response: response,
+                status: status,
+                body: body,
+                exception: exception
+              )
             )
-          )
+          end
         end
 
         raise rescued_exception if rescued_exception

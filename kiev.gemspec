@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 3.2"
   spec.add_dependency "oga", "~> 3.4"
-  spec.add_dependency "rack", ">= 2.2", "< 3"
+  spec.add_dependency "rack", ">= 2.2", "< 4"
   spec.add_dependency "request_store", ">= 1.4", "< 1.5"
   spec.add_development_dependency "rake", "~> 12.2"
   spec.add_development_dependency "rspec", "~> 3.12"
